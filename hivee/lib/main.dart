@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hivee/type_adapter/adapterusing.dart';
-import 'package:hivee/type_adapter/model.dart';
+import 'package:hivee/learnAdapter/person.dart';
+import 'package:hivee/learnAdapter/typeadapter.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  Hive.initFlutter();
-  // await Hive.openBox('newkey');
-  Hive.registerAdapter(StudentAdapter());
-  await Hive.openBox<Student>('student');
+  await Hive.initFlutter();
+  Hive.registerAdapter(PersonAdapter());
+  await Hive.openBox<Person>('mydata');
+
   runApp(const MyApp());
 }
 
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Myapp",
-      home: HiveUsing(),
+      home: LearnAdapter(),
     );
   }
 }
