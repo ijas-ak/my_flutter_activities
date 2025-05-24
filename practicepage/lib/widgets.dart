@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slidable_button/slidable_button.dart';
 
 class TodoList extends StatefulWidget {
   final String name;
@@ -41,6 +40,19 @@ class _TodoListState extends State<TodoList> {
               setState(() {
                 selected = !selected;
               });
+              !selected
+                  ? ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: Duration(milliseconds: 300),
+                      content: Text("Task Reseted"),
+                    ),
+                  )
+                  : ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: Duration(milliseconds: 300),
+                      content: Text("Task Completed"),
+                    ),
+                  );
             },
           ),
         ),

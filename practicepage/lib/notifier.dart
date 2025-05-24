@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:practicepage/widgets.dart';
 
@@ -26,6 +27,14 @@ class _DemoAppState extends State<DemoApp> {
     setState(() {
       toDolist.remove(name);
     });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.red,
+
+        duration: Duration(seconds: 1),
+        content: Text("Data Deleted Succesfully..."),
+      ),
+    );
     saveData();
   }
 
@@ -53,7 +62,12 @@ class _DemoAppState extends State<DemoApp> {
     return Scaffold(
       backgroundColor: Colors.amber,
       appBar: AppBar(
-        title: Text("TO Do List"),
+        leading: Icon(
+          FontAwesomeIcons.pencil,
+          size: 30,
+          color: Colors.deepPurple,
+        ),
+        title: Text("TO DO List"),
         centerTitle: true,
         backgroundColor: Colors.yellow.shade300,
         elevation: 0,
@@ -78,6 +92,8 @@ class _DemoAppState extends State<DemoApp> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        elevation: 30,
+        shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(30)),
         backgroundColor: Colors.yellow[400],
         onPressed: () {
           showDialog(
@@ -100,6 +116,13 @@ class _DemoAppState extends State<DemoApp> {
                     onPressed: () {
                       addToList();
                       Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.green,
+                          duration: Duration(seconds: 1),
+                          content: Text("Data Added Successfully.."),
+                        ),
+                      );
                     },
                     child: Text("Save"),
                   ),
@@ -108,7 +131,7 @@ class _DemoAppState extends State<DemoApp> {
             },
           );
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.edit, size: 30),
       ),
     );
   }
